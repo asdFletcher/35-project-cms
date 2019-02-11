@@ -81,12 +81,12 @@ class Records extends React.Component {
                 style={styles.delete}
                 onClick={() => this.deleteRecord(record._id)}
               >
-                x
+                ✖︎
               </span>
             </li>
           ))}
         </ul>
-        <button onClick={this.props.clearRecord}>+</button>
+        <button onClick={this.props.clearRecord}>Add new</button>
       </When>
     );
   }
