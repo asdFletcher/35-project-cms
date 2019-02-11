@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import util from 'util';
 
+import styles from "./base.scss";
 
 import CMS from './components/cms/cms.js';
 

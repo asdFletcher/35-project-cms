@@ -19,18 +19,18 @@ export default class CMS extends React.Component {
       <>
         <header>
           <nav>
-            <h1>-MODELS-</h1>
+            <h2>MODELS</h2>
             <Models />
           </nav>
         </header>
 
         <section>
-          <h1>-RECORDS-</h1>
+          <h2>RECORDS</h2>
           <Records />
         </section>
 
         <section>
-          <h1>-RECORD-</h1>
+          <h2>RECORD</h2>
           <Record />
         </section>
       </>

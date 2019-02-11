@@ -37,7 +37,6 @@ export default (state = initialState, action) => {
       return { ...state, records: payload };
 
     case "CLEAR":
-      console.log(`clear detected 2`);
       return { ... state, record: {} };
 
     case "RECORD":

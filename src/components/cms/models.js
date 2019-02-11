@@ -68,7 +68,7 @@ class Models extends React.Component {
                   this.selectModel(model);
                 }}
               >
-                <span style={styles.clickable}>Model: {model}</span>
+                <span>{model}</span>
               </li>
             ))}
         </ul>
