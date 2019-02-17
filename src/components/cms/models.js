@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-const API = process.env.REACT_APP_API;
+const API = 'https://javascript-401-api.herokuapp.com/api/v1';
 
 const mapStateToProps = state => {
   return ({
