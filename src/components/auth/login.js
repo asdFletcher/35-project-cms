@@ -1,8 +1,19 @@
 import React from 'react';
 import util from 'util';
 import { When } from './../if';
+import superagent from 'superagent';
+import queryString from 'querystring';
+
 import { LoginContext } from "./context.js";
+
 class Login extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    }
+  }
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
@@ -12,9 +23,17 @@ class Login extends React.Component {
     e.preventDefault();
     contextLogoutFunction();
   }
+
   login = (e, contextLoginFunction) => {
     e.preventDefault();
-    contextLoginFunction();
+    superagent.post(`${process.env.REACT_APP_API_BASE}/signin`)
+      .auth(this.state.username, this.state.password)
+      .then( res => {
+        let token = res.text;
+        contextLoginFunction(token);
+      })
+      .catch(console.error);
+
   }
 
   render() {
@@ -23,12 +42,11 @@ class Login extends React.Component {
           { (context) => {
             return (
               <>
-                <h1>this is the login component</h1>
-                <When condition={true}>
+                <When condition={context.loggedIn}>
                   <button 
                   onClick={(e) => { this.logout(e, context.logout)}}>Logout</button>
                 </When>
-                <When condition={true}>
+                <When condition={!context.loggedIn}>
                   <form>
                     <input 
                     name="username"

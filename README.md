@@ -23,3 +23,23 @@
 ### Data UML:
 ![data_uml](./assets/data_uml.jpeg)
 
+---
+
+### Testing
+
+Testing for this project is accomplished using `react-scripts` built in testing:
+
+In the `package.json` file, a script is setup for:
+```
+"test": "react-scripts test --env=jsdom",
+```
+
+To run a test:
+
+```
+npm test
+```
+
+
+
+

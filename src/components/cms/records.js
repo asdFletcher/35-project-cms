@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import util from 'util';
-
+import Auth from '../auth/auth.js';
 import { When } from "../if";
 
 import * as actions from "./actions.js";
@@ -24,9 +24,7 @@ const mapStateToProps = state => {
   })
 };
 
-
 const mapDispatchToProps = (dispatch) => {
-  console.log({dispatch});
   return ({
     getRecord: url => dispatch(actions.getRecord(url)),
     deleteRecord: (model, id, url) => dispatch(actions.destroy(model, id, url)),
@@ -59,13 +57,23 @@ class Records extends React.Component {
     this.props.deleteRecord(this.props.model, id, url);
   };
 
+  DeleteButton = (record) => {
+    return (
+      <span
+        style={styles.delete}
+        onClick={() => this.deleteRecord(record._id)}
+      >
+        ✖︎
+      </span>
+    )
+  }
+
   /**
    * Renders all Records if a model is specified
    * @function render
    * @param {number} id
    */
   render() {
-    console.log(`this.props ${util.inspect(this.props)}`);
     return (
       <When condition={this.props.model}>
         <ul>
@@ -77,16 +85,15 @@ class Records extends React.Component {
               >
                 {record.name}
               </span>
-              <span
-                style={styles.delete}
-                onClick={() => this.deleteRecord(record._id)}
-              >
-                ✖︎
-              </span>
+              <Auth capability='delete'>
+                {this.DeleteButton(record)}
+              </Auth>
             </li>
           ))}
         </ul>
-        <button onClick={this.props.clearRecord}>Add new</button>
+        <Auth capability='create'>
+          <button onClick={this.props.clearRecord}>Add new</button>
+        </Auth>
       </When>
     );
   }

@@ -20,9 +20,11 @@ export const setModel = model => {
  * @param {string} url
  */
 export const getSchema = (model, url) => dispatch => {
-  superagent.get(url).then(data => {
+  superagent.get(url)
+  .then(data => {
     dispatch(runGetSchema({ model: model, schema: data.body }));
-  });
+  })
+  .catch(console.err);
 };
 
 /**
@@ -44,7 +46,7 @@ const runGetSchema = payload => {
  * @param {string} url
  */
 export const getModels = url => dispatch => {
-  superagent.get(url).then(data => {
+  return superagent.get(url).then(data => {
     dispatch(runGetModels(data.body));
   });
 };
@@ -68,7 +70,7 @@ const runGetModels = payload => {
  * @param {string} url
  */
 export const getRecords = url => dispatch => {
-  superagent.get(url).then(data => {
+  return superagent.get(url).then(data => {
     dispatch(runGetRecords(data.body.results));
   });
 };
@@ -92,7 +94,7 @@ const runGetRecords = payload => {
  * @param {string} url
  */
 export const getRecord = url => dispatch => {
-  superagent.get(url).then(data => {
+  return superagent.get(url).then(data => {
     dispatch(runGetRecord(data.body));
   });
 };
@@ -118,7 +120,7 @@ const runGetRecord = payload => {
  * @param {object} record
  */
 export const post = (model, url, record) => dispatch => {
-  superagent
+  return superagent
     .post(url)
     .send(record)
     .then(data => {
@@ -147,7 +149,7 @@ const runPost = payload => {
  * @param {object} record
  */
 export const put = (model, url, record) => dispatch => {
-  superagent
+  return superagent
     .put(url)
     .send(record)
     .then(data => {
@@ -176,7 +178,7 @@ const runPut = payload => {
  * @param {object} record
  */
 export const destroy = (model, id, url) => dispatch => {
-  superagent.delete(url).then(data => {
+  return superagent.delete(url).then(data => {
     dispatch(runDestroy({ model, id }));
   });
 };
