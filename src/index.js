@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import Login from './components/auth/login.js';
+import LoginContext from './components/auth/context.js';
+import Auth from './components/auth/auth.js';
 import util from 'util';
 
 import styles from "./base.scss";
@@ -15,7 +18,14 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <CMS />
+        <LoginContext>
+          <Login />
+
+          <Auth>
+            <CMS />
+          </Auth>
+
+        </LoginContext>
       </BrowserRouter>
     </Provider>
   );

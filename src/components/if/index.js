@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import util from 'util';
 
 /**
  * Takes props and returns a cloned map of children with a condition passed down
@@ -18,10 +19,12 @@ const render = (condition = false, children = null) => {
  * @param {object} props
  * @returns {function} render
  */
-export const If = props =>
-  React.Children.map(props.children, child =>
+export const If = props => {
+  return React.Children.map(props.children, child =>
     React.cloneElement(child, { condition: props.condition }),
-);
+  );
+}
+  
 
 /**
  * React function component
